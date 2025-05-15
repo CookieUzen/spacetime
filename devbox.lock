@@ -1,0 +1,79 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "godot_4@latest": {
+      "last_modified": "2025-05-12T14:38:58Z",
+      "resolved": "github:NixOS/nixpkgs/eaeed9530c76ce5f1d2d8232e08bec5e26f18ec1#godot_4",
+      "source": "devbox-search",
+      "version": "4.4.1-stable",
+      "systems": {
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/kpfxw4b9fb521lc1r40zx2ad77125j8s-godot-4.4.1-stable",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/jc3r9p303dl7ch94i1akx0jg25ljiv12-godot-4.4.1-stable-man",
+              "default": true
+            },
+            {
+              "name": "debug",
+              "path": "/nix/store/33jmm743ar7b9k3xxk7z584ip59kik0v-godot-4.4.1-stable-debug"
+            }
+          ],
+          "store_path": "/nix/store/kpfxw4b9fb521lc1r40zx2ad77125j8s-godot-4.4.1-stable"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/iixq5lwvbzmllvq04wi015g0v4anp9lj-godot-4.4.1-stable",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/47lyv7fabfjxybjhgdlrv5vzr00pcmkh-godot-4.4.1-stable-man",
+              "default": true
+            },
+            {
+              "name": "debug",
+              "path": "/nix/store/ml9w0s7ylgk1k115k8359mdr0i87kkni-godot-4.4.1-stable-debug"
+            }
+          ],
+          "store_path": "/nix/store/iixq5lwvbzmllvq04wi015g0v4anp9lj-godot-4.4.1-stable"
+        }
+      }
+    },
+    "libresprite@latest": {
+      "last_modified": "2025-05-06T08:06:31Z",
+      "resolved": "github:NixOS/nixpkgs/1cb1c02a6b1b7cf67e3d7731cbbf327a53da9679#libresprite",
+      "source": "devbox-search",
+      "version": "1.1",
+      "systems": {
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/7lvzqh9lw5r8qw52wnhb8j03029k76xb-libresprite-1.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/7lvzqh9lw5r8qw52wnhb8j03029k76xb-libresprite-1.1"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/6rc0qrih8kx7g4000lv511k6vxwxdin8-libresprite-1.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/6rc0qrih8kx7g4000lv511k6vxwxdin8-libresprite-1.1"
+        }
+      }
+    }
+  }
+}
