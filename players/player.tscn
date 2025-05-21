@@ -1,26 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://ok7vq1pc57qc"]
+[gd_scene load_steps=4 format=3 uid="uid://ok7vq1pc57qc"]
 
-[ext_resource type="SpriteFrames" uid="uid://ca8jvjwpl7va1" path="res://players/spaceship1.res" id="1_l271l"]
+[ext_resource type="Script" uid="uid://cf1ybr6xev321" path="res://players/spaceship.gd" id="1_i6aj8"]
+[ext_resource type="Texture2D" uid="uid://bg2hifg06tx7d" path="res://players/spaceship1.png" id="1_l271l"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i6aj8"]
+friction = 0.5
+bounce = 0.5
 
 [node name="Player" type="Node2D"]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_i6aj8")
+script = ExtResource("1_i6aj8")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
-sprite_frames = ExtResource("1_l271l")
-metadata/_aseprite_wizard_interface_config_ = {
-"pending_changes": {
-"embed_tex": true,
-"layers": [],
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"should_round_fps": true,
-"slice": "",
-"source": "res://players/spaceship1.ase",
-"source_uid": 8602022491072651417
-}
-}
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture_filter = 1
+texture = ExtResource("1_l271l")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+scale = Vector2(3, 3)
+polygon = PackedVector2Array(-2, -5, -2, -4, -4, -4, -4, -2, -5, -2, -5, 0, -6, 0, -6, 2, -7, 2, -7, 5, -4, 5, -4, 3, -3, 3, -3, 2, -2, 2, -2, 1, 2, 1, 2, 2, 3, 2, 3, 3, 4, 3, 4, 5, 7, 5, 7, 2, 6, 2, 6, 0, 5, 0, 5, -2, 4, -2, 4, -4, 2, -4, 2, -5)
