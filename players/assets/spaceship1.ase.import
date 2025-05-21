@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dus5b3a6pjvqn"
+path="res://.godot/imported/spaceship1.ase-44e01fe961f0f18e50afe2fc3868cf92.res"
+
+[deps]
+
+source_file="res://players/assets/spaceship1.ase"
+dest_files=["res://.godot/imported/spaceship1.ase-44e01fe961f0f18e50afe2fc3868cf92.res"]
+
+[params]
+
