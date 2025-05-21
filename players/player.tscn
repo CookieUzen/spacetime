@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://ok7vq1pc57qc"]
+
+[ext_resource type="SpriteFrames" uid="uid://ca8jvjwpl7va1" path="res://players/spaceship1.res" id="1_l271l"]
+
+[node name="Player" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
+sprite_frames = ExtResource("1_l271l")
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {
+"embed_tex": true,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"should_round_fps": true,
+"slice": "",
+"source": "res://players/spaceship1.ase",
+"source_uid": 8602022491072651417
+}
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
