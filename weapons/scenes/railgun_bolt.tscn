@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://57uy0pei6q0a"]
+
+[ext_resource type="Script" uid="uid://37hbw0feimm4" path="res://weapons/scripts/railgun_bolt.gd" id="1_lijlt"]
+[ext_resource type="Texture2D" uid="uid://b4hf7yca38fje" path="res://weapons/resources/railgun.png" id="2_hph4r"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lijlt"]
+friction = 0.0
+bounce = 0.7
+
+[node name="RailgunBolt" type="RigidBody2D"]
+collision_layer = 256
+collision_mask = 259
+physics_material_override = SubResource("PhysicsMaterial_lijlt")
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_lijlt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hph4r")
+offset = Vector2(2, 2)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2, -17, -2, -8, -4, -0.0999985, -4, 17, 4, 17, 4, -0.0999985, 2, -8, 2, -17)

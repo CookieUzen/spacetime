@@ -11,6 +11,11 @@
     "scripts": {
       "test": [
         "echo \"Error: no test specified\" && exit 1"
+      ],
+      "godot": [
+        "pwd=$(pwd)",
+        "cd && godot --display-driver wayland > /tmp/godot 2>&1",
+        "cd $pwd && nvim --listen localhost:55432"
       ]
     }
   }

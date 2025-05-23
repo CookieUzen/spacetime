@@ -4,6 +4,27 @@ const THRUST_FORCE: float = 100000.0
 const ROTATION_FORCE: float = 100000.0
 const BRAKE_FORCE: float = 2.0
 
+var gun_scene: PackedScene
+var gun: Node2D
+
+func _ready() -> void:
+	# Make a railgun and add it to our mount point
+	gun_scene = preload("res://weapons/scenes/railgun.tscn")
+	print("Gun scene: ", gun_scene)
+	
+	# create a gun and add it to the player (not ship)
+	gun = gun_scene.instantiate() as Node2D
+	call_deferred("add_sibling", gun)	# We need to defer here, 
+										# because parent need to set up its own tree first
+
+func _process(delta: float) -> void:
+	# Check if we are holding down weapon
+	if Input.is_action_just_pressed("fire_weapon"):
+		gun.charge()
+	if Input.is_action_just_released("fire_weapon"):
+		gun.fire()
+
+
 func _physics_process(delta: float) -> void:
 	# movement calculations
 	var rot_dir: float = 0;		# % of max rot force

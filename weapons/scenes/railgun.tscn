@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxd2goq7oqwn1"]
+
+[ext_resource type="Script" uid="uid://d3yrr20wpq2bq" path="res://weapons/scripts/railgun.gd" id="1_7bwii"]
+
+[node name="Railgun" type="Node2D"]
+script = ExtResource("1_7bwii")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ChargeTimer" type="Timer" parent="."]
+one_shot = true
