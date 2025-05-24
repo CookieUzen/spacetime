@@ -1,7 +1,7 @@
 extends Node2D
 
-const DAMAGE: float = 10
-const MAX_FORCE: float = 1000
+const DMG_DIVISOR: float = 80000	# Divides KE by this amount
+const MAX_FORCE: float = 500
 
 @export var bolt_scene: PackedScene = preload("res://weapons/scenes/railgun_bolt.tscn")
 
@@ -70,7 +70,7 @@ func fire() -> void:
 	current_bolt.freeze = false
 
 	# tell the bolt to fire
-	current_bolt.fire(force)
+	current_bolt.fire(force, DMG_DIVISOR)
 
 	# add recoil to the ship
 	ship.apply_impulse(force * -1)

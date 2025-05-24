@@ -1,11 +1,14 @@
 extends RigidBody2D
 
 @export var lifetime: float = 10.0
-var in_motion: bool = false
+@export var dmg_divisor: float = 1.0
+@export var in_motion: bool = false
 
-func fire(force: Vector2) -> void:
+# Fire the bolt with a force and damage coefficient
+func fire(force: Vector2, damage_divisor: float) -> void:
 	# get rid of angular momentum: don't want the bolt to spin
 	self.angular_velocity = 0
+	self.dmg_divisor = damage_divisor
 
 	# apply the force to the bolt
 	apply_impulse(force)
@@ -20,4 +23,3 @@ func _process(delta: float) -> void:
 		queue_free()
 
 # TODO: When auto garbage collect after hitting something
-
