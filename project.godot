@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
 
+[global_group]
+
+Spaceships="Spaceships that players control"
+Projectiles="Projectile that can damage players"
+
 [input]
 
 forward={
@@ -63,4 +68,5 @@ fire_weapon={
 [physics]
 
 2d/run_on_separate_thread=true
+2d/physics_engine="GodotPhysics2D"
 2d/default_gravity=0.0

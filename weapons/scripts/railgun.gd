@@ -1,7 +1,7 @@
 extends Node2D
 
-const DAMAGE: float = 10
-const MAX_FORCE: float = 1000
+const DMG_DIVISOR: float = 80000	# Divides KE by this amount
+const MAX_FORCE: float = 500
 
 @export var bolt_scene: PackedScene = preload("res://weapons/scenes/railgun_bolt.tscn")
 
@@ -40,6 +40,7 @@ func charge() -> bool:
 
 	# start the charge_timer
 	charge_timer.start()
+	cooldown_timer.start()
 
 	return true
 
@@ -62,7 +63,7 @@ func fire() -> void:
 		return
 
 	# Calulate the force to apply
-	var percentage_charged = 1 - charge_timer.time_left / charge_timer.wait_time
+	var percentage_charged = get_charge_pct(charge_timer, 0.3, 8.0)
 	var muzzle_dir = muzzle.global_transform.y.normalized() * -1
 	var force = muzzle_dir * MAX_FORCE * percentage_charged
 
@@ -70,7 +71,7 @@ func fire() -> void:
 	current_bolt.freeze = false
 
 	# tell the bolt to fire
-	current_bolt.fire(force)
+	current_bolt.fire(force, DMG_DIVISOR)
 
 	# add recoil to the ship
 	ship.apply_impulse(force * -1)
@@ -79,8 +80,20 @@ func fire() -> void:
 	current_bolt = null
 
 	# Reset out timers
-	cooldown_timer.start()
 	charge_timer.stop()
+
+# 0 ≤ center ≤ 1  :  where you want the knee
+# steepness (k)   :  how sharp the knee feels
+func get_charge_pct(timer: Timer, center := 0.5, steepness := 10.0) -> float:
+	# Linear 0‒1 progress (what you had).
+	var t := 1.0 - timer.time_left / timer.wait_time	  # elapsed / wait_time
+
+	# Logistic sigmoid, centred at 0.5.
+	#	  f(t) = 1 / (1 + e^(-k (t-0.5)))
+	# 'steepness' k controls how “sharp” the knee is.
+	var s := 1.0 / (1.0 + exp(-steepness * (t - center)))
+
+	return clamp(s, 0.0, 1.0)
 
 func _ready() -> void:
 	ship = get_parent().get_node("Spaceship")	# marker -> RigidBody2D

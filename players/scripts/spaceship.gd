@@ -1,16 +1,19 @@
 extends RigidBody2D
 
+signal hit(target: Node, impulse: float)	# hit by something, provides impulse vector
+
 const THRUST_FORCE: float = 100000.0
 const ROTATION_FORCE: float = 100000.0
 const BRAKE_FORCE: float = 2.0
+const RAMMING_DIVISOR: float = 3000	# Divides KE by this amount
 
 var gun_scene: PackedScene
 var gun: Node2D
+@export var ramming_divisor: float = RAMMING_DIVISOR
 
 func _ready() -> void:
 	# Make a railgun and add it to our mount point
 	gun_scene = preload("res://weapons/scenes/railgun.tscn")
-	print("Gun scene: ", gun_scene)
 	
 	# create a gun and add it to the player (not ship)
 	gun = gun_scene.instantiate() as Node2D
@@ -58,3 +61,24 @@ func _physics_process(delta: float) -> void:
 		linear_damp = BRAKE_FORCE
 	else:
 		linear_damp = 0
+
+
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+
+	var hit_by_arr: Array = []
+
+	# calculate collision kinetic energy
+	for i in state.get_contact_count():
+
+		var hit_by := state.get_contact_collider_object(i)
+
+		# Don't count the same object twice
+		if hit_by_arr.has(hit_by):
+			continue
+
+		hit_by_arr.append(hit_by)
+
+		var rel_v := linear_velocity - state.get_contact_collider_velocity_at_position(i)
+		var ke    := 0.5 * mass * rel_v.length_squared()
+
+		emit_signal("hit", hit_by, ke)
