@@ -5,7 +5,8 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lijlt"]
 friction = 0.0
-bounce = 0.7
+bounce = 1.0
+absorbent = true
 
 [node name="RailgunBolt" type="RigidBody2D" groups=["Projectiles"]]
 collision_layer = 256

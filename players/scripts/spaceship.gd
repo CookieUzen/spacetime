@@ -14,7 +14,6 @@ var gun: Node2D
 func _ready() -> void:
 	# Make a railgun and add it to our mount point
 	gun_scene = preload("res://weapons/scenes/railgun.tscn")
-	print("Gun scene: ", gun_scene)
 	
 	# create a gun and add it to the player (not ship)
 	gun = gun_scene.instantiate() as Node2D

@@ -5,7 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://bg2hifg06tx7d" path="res://players/resources/spaceship1.png" id="2_mdjji"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i6aj8"]
-friction = 0.5
+friction = 0.7
+rough = true
 bounce = 0.5
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6qu8m"]
@@ -58,3 +59,7 @@ texture = ExtResource("2_mdjji")
 position = Vector2(318, 195)
 scale = Vector2(10, 10)
 polygon = PackedVector2Array(-2, -5, -2, -4, -4, -4, -4, -2, -5, -2, -5, 0, -6, 0, -6, 2, -7, 2, -7, 5, -4, 5, -4, 3, -3, 3, -3, 2, -2, 2, -2, 1, 2, 1, 2, 2, 3, 2, 3, 3, 4, 3, 4, 5, 7, 5, 7, 2, 6, 2, 6, 0, 5, 0, 5, -2, 4, -2, 4, -4, 2, -4, 2, -5)
+
+[node name="ShieldRegenDelay" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
