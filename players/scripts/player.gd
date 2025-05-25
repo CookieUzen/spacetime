@@ -4,6 +4,10 @@ const MAX_HP : float = 100.0
 const MAX_SHIELD : float = 30.0
 const SHIELD_REGEN : float = 4.0
 
+@export var player_id := 0;
+@export var player_input_mapping := "";
+@export var player_name := ""
+
 const ARMOR : float = 0.8	# Armor coefficient, times all dmg by this value
 
 signal shield_broken()	# When shield is broken
@@ -16,6 +20,21 @@ signal spaceship_destroyed()	# When hp is below 0
 # Shield system
 @export var shield : float;
 @onready var shield_regen_delay_timer: Timer = $ShieldRegenDelay
+
+# This runs before child's _ready()
+func _enter_tree() -> void:
+	# Sanity check
+	if player_id == 0:
+		print("Player ID not set, defaulting to 1")
+		player_id = 1
+	if player_input_mapping == "":
+		print("Player input mapping not set, defaulting to p1_")
+		player_input_mapping = "p1_"
+
+	if player_name == "":
+		print("Player name not set, defaulting to Player " + str(player_id))
+		player_name = "Player " + str(player_id)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

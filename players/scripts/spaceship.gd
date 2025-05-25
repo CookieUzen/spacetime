@@ -11,9 +11,14 @@ var gun_scene: PackedScene
 var gun: Node2D
 @export var ramming_divisor: float = RAMMING_DIVISOR
 
+var p_in_map : String = "PLACEHOLDER-REPLACED-IN-_READY"	# Player input mapping
+
 func _ready() -> void:
 	# Make a railgun and add it to our mount point
 	gun_scene = preload("res://weapons/scenes/railgun.tscn")
+
+	# Get the player input mapping from the parent
+	p_in_map = get_parent().player_input_mapping
 	
 	# create a gun and add it to the player (not ship)
 	gun = gun_scene.instantiate() as Node2D
@@ -22,9 +27,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Check if we are holding down weapon
-	if Input.is_action_just_pressed("fire_weapon"):
+	if Input.is_action_just_pressed(p_in_map+"fire_weapon"):
 		gun.charge()
-	if Input.is_action_just_released("fire_weapon"):
+	if Input.is_action_just_released(p_in_map+"fire_weapon"):
 		gun.fire()
 
 
@@ -35,11 +40,11 @@ func _physics_process(delta: float) -> void:
 	var thrustVec: Vector2 = Vector2.UP;	# store the thrust vector
 
 	# Get user input:
-	var turn_left:bool = Input.is_action_pressed("turn_left");
-	var turn_right:bool = Input.is_action_pressed("turn_right");
-	var forwards:bool = Input.is_action_pressed("forward");
-	var backwards:bool = Input.is_action_pressed("back");
-	var brake:bool  = Input.is_action_pressed("brake");
+	var turn_left:bool = Input.is_action_pressed(p_in_map + "turn_left");
+	var turn_right:bool = Input.is_action_pressed(p_in_map + "turn_right");
+	var forwards:bool = Input.is_action_pressed(p_in_map + "forward");
+	var backwards:bool = Input.is_action_pressed(p_in_map + "back");
+	var brake:bool  = Input.is_action_pressed(p_in_map + "brake");
 
 	if turn_left:
 		rot_dir -= 1;
