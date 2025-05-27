@@ -26,7 +26,8 @@ func charge() -> bool:
 		return false
 	
 	# disable collision for the bolt when charging
-	current_bolt.add_collision_exception_with(ship)
+	for ships in GameState.players:
+		current_bolt.add_collision_exception_with(ships.get_node("Spaceship"))
 
 	# freeze the bolt to remove any physics calculations (we update the location manually)
 	current_bolt.freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
@@ -52,7 +53,9 @@ func _on_bolt_body_exited(exited_body: Node, bolt: RigidBody2D) -> void:
 		return
 
 	# now safe to re-enable
-	bolt.remove_collision_exception_with(ship)
+	for ships in GameState.players:
+		# re-enable collision with the ship
+		bolt.remove_collision_exception_with(ships.get_node("Spaceship"))
 
 	# disconnect so you don’t get called again
 	barrel.body_exited.disconnect(_on_bolt_body_exited.bind(current_bolt))
