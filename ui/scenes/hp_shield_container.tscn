@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqjaoelfh7vjm"]
+
+[ext_resource type="Script" uid="uid://bd4swa4sdgs67" path="res://ui/scripts/hp_shield_container.gd" id="1_ehmgl"]
+[ext_resource type="Texture2D" uid="uid://cbx5i04aul2ec" path="res://ui/hud.tres" id="2_hnh4d"]
+
+[node name="HPShieldContainer" type="MarginContainer"]
+offset_right = 400.0
+offset_bottom = 50.0
+script = ExtResource("1_ehmgl")
+hp = 25.0
+shield = 10.0
+max_hp = 30.0
+max_shield = 10.0
+
+[node name="ShieldBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+value = 40.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_hnh4d")
+texture_progress = ExtResource("2_hnh4d")
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(0, 0, 1, 1)
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+value = 23.0
+nine_patch_stretch = true
+texture_progress = ExtResource("2_hnh4d")
+tint_progress = Color(0, 1, 0, 1)

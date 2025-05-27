@@ -1,14 +1,14 @@
 extends Node2D
 
-const MAX_HP : float = 100.0
-const MAX_SHIELD : float = 30.0
-const SHIELD_REGEN : float = 4.0
+@export var max_hp : float = 100.0
+@export var max_shield : float = 30.0
+@export var shield_regen_delay : float = 4.0
 
 @export var player_id := 0;
 @export var player_input_mapping := "";
 @export var player_name := ""
 
-const ARMOR : float = 0.8	# Armor coefficient, times all dmg by this value
+@export var armor : float = 0.8	# Armor coefficient, times all dmg by this value
 
 signal shield_broken()	# When shield is broken
 signal shield_regen()	# When shield starts regenerating
@@ -34,13 +34,16 @@ func _enter_tree() -> void:
 	if player_name == "":
 		print("Player name not set, defaulting to Player " + str(player_id))
 		player_name = "Player " + str(player_id)
+	
+	# Register the player in the game state
+	GameState.new_player(self)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
-	hp = MAX_HP
-	shield = MAX_SHIELD
+	hp = max_hp
+	shield = max_shield
 
 	# reset the shield regen timer
 	shield_regen_delay_timer.stop()
@@ -79,13 +82,16 @@ func _on_hit(body: Node2D, ke: float) -> void:
 	# Minus left over from the hp
 	hp -= dmg
 
+	# Update the game state
+	GameState.update_hp(player_id, hp)
+	GameState.update_shield(player_id, shield)
 
 # Function to calculate damage
 # Accepts the body collided with and returns the damage dealt
 func projectile_dmg_model(body: Node2D, ke: float) -> float:
 	var dmg: float = 0.0
 
-	dmg = ke / body.get("dmg_divisor") * ARMOR
+	dmg = ke / body.get("dmg_divisor") * armor
 
 	return dmg
 
@@ -96,7 +102,7 @@ func ship_dmg_model(body: Node2D, ke: float) -> float:
 	if body.get("ramming_divisor") != null:
 		ramming_divisor = body.get("ramming_divisor")
 
-	dmg = ke / ramming_divisor * ARMOR
+	dmg = ke / ramming_divisor * armor
 
 	return dmg
 
@@ -104,10 +110,11 @@ func ship_dmg_model(body: Node2D, ke: float) -> float:
 func _process(delta: float) -> void:
 
 	# Regenerate the shield if not been hit recently
-	if shield_regen_delay_timer.time_left == 0:
-		shield += SHIELD_REGEN * delta
+	if shield != max_shield && shield_regen_delay_timer.time_left == 0:
+		shield += shield_regen_delay * delta
+		GameState.update_shield(player_id, shield)
 		
-	shield = clamp(shield, 0, MAX_SHIELD)
+	shield = clamp(shield, 0, max_shield)
 
 	if hp <= 0:
 		_spaceship_destroyed()
@@ -115,15 +122,10 @@ func _process(delta: float) -> void:
 # Runs when the shield is broken
 func _shield_broken() -> void:
 	shield_regen_delay_timer.start()
-	print("Shield down!")
-
 	emit_signal("shield_broken")
 
 # Runs when the shield starts regenerating
 func _shield_regen() -> void:
-	print("Shield regenerating!")
-	print("hp: ", hp)
-
 	emit_signal("shield_regen")
 
 # Runs when the hp is below 0
