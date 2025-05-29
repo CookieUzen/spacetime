@@ -12,7 +12,7 @@ extends Node2D
 
 @export var ability: Node2D = null # The ability instance, loaded from the ability scene
 
-signal shield_broken()	# When shield is broken
+signal hit()	# When shield is broken
 signal shield_regen()	# When shield starts regenerating
 signal spaceship_destroyed()	# When hp is below 0
 
@@ -100,8 +100,8 @@ func _on_hit(body: Node2D, ke: float) -> void:
 		dmg = -shield_after_dmg
 		shield = 0.0
 
-		# restart timer and emit signals
-		_shield_broken()
+	# restart timer and emit signals
+	_hit()
 	
 	# Minus left over from the hp
 	hp -= dmg
@@ -147,9 +147,9 @@ func _process(delta: float) -> void:
 		_spaceship_destroyed()
 
 # Runs when the shield is broken
-func _shield_broken() -> void:
+func _hit() -> void:
 	shield_regen_delay_timer.start()
-	emit_signal("shield_broken")
+	emit_signal("hit")
 
 # Runs when the shield starts regenerating
 func _shield_regen() -> void:
