@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgrx2mdr8j6ys"]
+
+[ext_resource type="Script" uid="uid://c14dlqi8w5wjk" path="res://abilities/scripts/generic_ability.gd" id="1_vkhxn"]
+
+[node name="GenericAbility" type="Node2D"]
+script = ExtResource("1_vkhxn")
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true

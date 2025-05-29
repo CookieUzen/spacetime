@@ -10,6 +10,8 @@ extends Node2D
 
 @export var armor : float = 0.8	# Armor coefficient, times all dmg by this value
 
+@export var ability: Node2D = null # The ability instance, loaded from the ability scene
+
 signal shield_broken()	# When shield is broken
 signal shield_regen()	# When shield starts regenerating
 signal spaceship_destroyed()	# When hp is below 0
@@ -52,6 +54,28 @@ func _ready() -> void:
 
 	# Listen for the player to be hit
 	$Spaceship.connect("hit", _on_hit)
+
+	# Load teleport ability for now
+	# TODO: link to menu or something
+	var teleport_scene: PackedScene = preload("res://abilities/scenes/teleport.tscn")
+	ability_loader(teleport_scene)
+
+func ability_loader(scene: PackedScene) -> bool:
+	# Load the ability scene and add it to the player
+	if scene == null:
+		push_error("Ability scene is null!")
+		return false
+
+	var ability_instance: Node2D = scene.instantiate() as Node2D
+	if ability_instance == null:
+		push_error("Ability instantiation failed!")
+		return false
+
+	add_child(ability_instance)
+	ability = ability_instance
+	print("Ability loaded: ", ability_instance.name)
+	return true
+
 
 # Function to handle the hit event
 func _on_hit(body: Node2D, ke: float) -> void:
@@ -108,6 +132,9 @@ func ship_dmg_model(body: Node2D, ke: float) -> float:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# Catch the input for the ability
+	if Input.is_action_just_pressed(player_input_mapping + "ability"):
+		ability.activate()
 
 	# Regenerate the shield if not been hit recently
 	if shield != max_shield && shield_regen_delay_timer.time_left == 0:

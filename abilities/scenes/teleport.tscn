@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb7lwg5i00es4"]
+
+[ext_resource type="PackedScene" uid="uid://cgrx2mdr8j6ys" path="res://abilities/scenes/generic_ability.tscn" id="1_jly2y"]
+[ext_resource type="Script" uid="uid://dnvpj1r5qy1a2" path="res://abilities/scripts/teleport.gd" id="2_j87m5"]
+
+[node name="Teleport" instance=ExtResource("1_jly2y")]
+script = ExtResource("2_j87m5")
+teleport_distance = 100.0
+
+[node name="Cooldown" parent="." index="0"]
+wait_time = 3.0
