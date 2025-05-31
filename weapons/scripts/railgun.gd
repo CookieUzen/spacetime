@@ -5,12 +5,17 @@ extends Weapon
 
 @export var bolt_scene: PackedScene = preload("res://weapons/scenes/railgun_bolt.tscn")
 
+@onready var animation_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var charge_timer: Timer = $ChargeTimer
 
 var current_bolt: RigidBody2D;
 
 # Charges the railgun. Returns false if on cooldown
 func _on_hold() -> bool:
+
+	# Toggle animation
+	animation_sprite.visible = true
+	animation_sprite.play("default")
 
 	# make a new bolt
 	current_bolt = bolt_scene.instantiate() as RigidBody2D
@@ -30,7 +35,7 @@ func _on_hold() -> bool:
 	barrel.body_exited.connect(_on_bolt_body_exited.bind(current_bolt))
 
 	# Add the bold to the scene
-	add_child(current_bolt)
+	add_sibling(current_bolt)
 
 	# start the charge_timer
 	charge_timer.start()
@@ -53,6 +58,11 @@ func _on_bolt_body_exited(exited_body: Node, bolt: RigidBody2D) -> void:
 
 # Fires the railgun. Returns false if not charged
 func _on_release() -> bool:
+	
+	# Stop the animation
+	animation_sprite.stop()
+	animation_sprite.visible = false
+
 	if current_bolt == null:
 		return false
 
@@ -91,8 +101,19 @@ func get_charge_pct(timer: Timer, center := 0.5, steepness := 10.0) -> float:
 
 	return clamp(s, 0.0, 1.0)
 
+func _ready() -> void:
+
+	animation_sprite.visible = false
+
+	# calculate animation speed
+	animation_sprite.speed_scale = 1 / charge_timer.wait_time
+
 func _process(delta: float) -> void:
 
 	# Keep the bolt in the same position as the ship
 	if current_bolt:
 		current_bolt.global_transform = muzzle.global_transform
+
+	# Keep the animation in sync with the ship
+	position = ship.position
+	rotation = ship.rotation

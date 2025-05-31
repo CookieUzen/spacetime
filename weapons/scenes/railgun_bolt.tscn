@@ -5,7 +5,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lijlt"]
 friction = 0.0
-bounce = 1.0
+bounce = 0.7
 absorbent = true
 
 [node name="RailgunBolt" type="RigidBody2D" groups=["Projectiles"]]
@@ -14,9 +14,10 @@ collision_mask = 4355
 mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_lijlt")
 center_of_mass_mode = 1
-center_of_mass = Vector2(10, 0)
+center_of_mass = Vector2(0, 15)
 contact_monitor = true
 max_contacts_reported = 10
+angular_damp = 10.0
 script = ExtResource("1_lijlt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
