@@ -17,8 +17,7 @@ height = 26.0
 script = ExtResource("1_mdjji")
 
 [node name="Spaceship" type="RigidBody2D" parent="." groups=["Spaceships"]]
-position = Vector2(500, 500)
-collision_mask = 257
+collision_mask = 4353
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_i6aj8")
 contact_monitor = true

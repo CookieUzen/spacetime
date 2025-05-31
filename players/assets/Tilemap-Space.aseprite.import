@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c6g6k10gb3olu"
+path="res://.godot/imported/Tilemap-Space.aseprite-7df030b34a7c9bf12e20bd4600878113.res"
+
+[deps]
+
+source_file="res://players/assets/Tilemap-Space.aseprite"
+dest_files=["res://.godot/imported/Tilemap-Space.aseprite-7df030b34a7c9bf12e20bd4600878113.res"]
+
+[params]
+

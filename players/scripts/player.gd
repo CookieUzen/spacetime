@@ -87,6 +87,9 @@ func _on_hit(body: Node2D, ke: float) -> void:
 	# If hit by a spaceship
 	elif body.is_in_group("Spaceships"):
 		dmg = ship_dmg_model(body, ke)
+	# If its type tilemaplayer, then do map damage
+	elif body.is_in_group("Map"):
+		dmg = map_dmg_model(body, ke)
 
 	print(self.name, " got hit by ",  body, ": ", dmg)
 
@@ -128,6 +131,12 @@ func ship_dmg_model(body: Node2D, ke: float) -> float:
 
 	dmg = ke / ramming_divisor * armor
 
+	return dmg
+
+func map_dmg_model(body: Node2D, ke: float) -> float:
+	var dmg: float = 0.0
+	var map_dmg_divisor: float = 5000
+	dmg = ke / map_dmg_divisor * armor
 	return dmg
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
