@@ -2,18 +2,24 @@ extends RigidBody2D
 
 signal hit(target: Node, impulse: float)	# hit by something, provides impulse vector
 
-const THRUST_FORCE: float = 100000.0
-const ROTATION_FORCE: float = 100000.0
-const BRAKE_FORCE: float = 2.0
+const DEFAULT_DAMPING: float = 1
+const DEFAULT_ANGLAR_DAMPING: float = 1
+const THRUST_FORCE: float = 100000.0 * DEFAULT_DAMPING	# Force applied to the ship when moving
+const ROTATION_FORCE: float = 100000.0	* DEFAULT_ANGLAR_DAMPING	# Force applied to the ship when turning
 const RAMMING_DIVISOR: float = 3000	# Divides KE by this amount
 
 var gun_scene: PackedScene
 var gun: Node2D
 @export var ramming_divisor: float = RAMMING_DIVISOR
 
+var p_in_map : String = "PLACEHOLDER-REPLACED-IN-_READY"	# Player input mapping
+
 func _ready() -> void:
 	# Make a railgun and add it to our mount point
 	gun_scene = preload("res://weapons/scenes/railgun.tscn")
+
+	# Get the player input mapping from the parent
+	p_in_map = get_parent().player_input_mapping
 	
 	# create a gun and add it to the player (not ship)
 	gun = gun_scene.instantiate() as Node2D
@@ -22,9 +28,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Check if we are holding down weapon
-	if Input.is_action_just_pressed("fire_weapon"):
+	if Input.is_action_just_pressed(p_in_map+"fire_weapon"):
 		gun.charge()
-	if Input.is_action_just_released("fire_weapon"):
+	if Input.is_action_just_released(p_in_map+"fire_weapon"):
 		gun.fire()
 
 
@@ -35,11 +41,11 @@ func _physics_process(delta: float) -> void:
 	var thrustVec: Vector2 = Vector2.UP;	# store the thrust vector
 
 	# Get user input:
-	var turn_left:bool = Input.is_action_pressed("turn_left");
-	var turn_right:bool = Input.is_action_pressed("turn_right");
-	var forwards:bool = Input.is_action_pressed("forward");
-	var backwards:bool = Input.is_action_pressed("back");
-	var brake:bool  = Input.is_action_pressed("brake");
+	var turn_left:bool = Input.is_action_pressed(p_in_map + "turn_left");
+	var turn_right:bool = Input.is_action_pressed(p_in_map + "turn_right");
+	var forwards:bool = Input.is_action_pressed(p_in_map + "forward");
+	var backwards:bool = Input.is_action_pressed(p_in_map + "back");
+	var stop_damping:bool  = Input.is_action_pressed(p_in_map + "stop_damping");
 
 	if turn_left:
 		rot_dir -= 1;
@@ -57,10 +63,12 @@ func _physics_process(delta: float) -> void:
 	apply_central_force(thrustVec * THRUST_FORCE * delta) 	# propel ship
 
 	# brake
-	if brake:
-		linear_damp = BRAKE_FORCE
-	else:
+	if stop_damping:
 		linear_damp = 0
+		angular_damp = 0 
+	else:
+		linear_damp = DEFAULT_DAMPING
+		angular_damp = DEFAULT_ANGLAR_DAMPING
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
