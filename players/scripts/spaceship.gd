@@ -29,9 +29,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Check if we are holding down weapon
 	if Input.is_action_just_pressed(p_in_map+"fire_weapon"):
-		gun.charge()
+		gun.on_hold()
 	if Input.is_action_just_released(p_in_map+"fire_weapon"):
-		gun.fire()
+		gun.on_release()
 
 
 func _physics_process(delta: float) -> void:

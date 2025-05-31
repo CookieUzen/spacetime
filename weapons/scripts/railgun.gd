@@ -1,23 +1,16 @@
-extends Node2D
+extends Weapon
 
-const DMG_DIVISOR: float = 80000	# Divides KE by this amount
-const MAX_FORCE: float = 500
+@export var dmg_divisor: float = 80000	# Divides KE by this amount
+@export var max_force: float = 500
 
 @export var bolt_scene: PackedScene = preload("res://weapons/scenes/railgun_bolt.tscn")
 
-@onready var cooldown_timer: Timer = $CooldownTimer
 @onready var charge_timer: Timer = $ChargeTimer
 
 var current_bolt: RigidBody2D;
-var ship: RigidBody2D;
-var muzzle: Node2D;
-var barrel: Node2D;
 
 # Charges the railgun. Returns false if on cooldown
-func charge() -> bool:
-	# First check if we are on cooldown
-	if !cooldown_timer.is_stopped():
-		return false
+func _on_hold() -> bool:
 
 	# make a new bolt
 	current_bolt = bolt_scene.instantiate() as RigidBody2D
@@ -41,8 +34,6 @@ func charge() -> bool:
 
 	# start the charge_timer
 	charge_timer.start()
-	cooldown_timer.start()
-
 	return true
 
 # Re-enable collision with the ship when the bolt is fired
@@ -61,20 +52,20 @@ func _on_bolt_body_exited(exited_body: Node, bolt: RigidBody2D) -> void:
 	barrel.body_exited.disconnect(_on_bolt_body_exited.bind(current_bolt))
 
 # Fires the railgun. Returns false if not charged
-func fire() -> void:
+func _on_release() -> bool:
 	if current_bolt == null:
-		return
+		return false
 
 	# Calulate the force to apply
 	var percentage_charged = get_charge_pct(charge_timer, 0.3, 8.0)
 	var muzzle_dir = muzzle.global_transform.y.normalized() * -1
-	var force = muzzle_dir * MAX_FORCE * percentage_charged
+	var force = muzzle_dir * max_force * percentage_charged
 
 	# Undo the freeze mode
 	current_bolt.freeze = false
 
-	# tell the bolt to fire
-	current_bolt.fire(force, DMG_DIVISOR)
+	# tell the bolt to _on_release
+	current_bolt.fire(force, dmg_divisor)
 
 	# add recoil to the ship
 	ship.apply_impulse(force * -1)
@@ -84,6 +75,8 @@ func fire() -> void:
 
 	# Reset out timers
 	charge_timer.stop()
+
+	return true
 
 # 0 ≤ center ≤ 1  :  where you want the knee
 # steepness (k)   :  how sharp the knee feels
@@ -97,11 +90,6 @@ func get_charge_pct(timer: Timer, center := 0.5, steepness := 10.0) -> float:
 	var s := 1.0 / (1.0 + exp(-steepness * (t - center)))
 
 	return clamp(s, 0.0, 1.0)
-
-func _ready() -> void:
-	ship = get_parent().get_node("Spaceship")	# marker -> RigidBody2D
-	muzzle = ship.get_node("Muzzle")	# RigidBody2D -> Railgun
-	barrel = muzzle.get_node("Barrel")	# muzzle -> barrel
 
 func _process(delta: float) -> void:
 

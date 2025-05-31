@@ -1,13 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxd2goq7oqwn1"]
+[gd_scene load_steps=4 format=3 uid="uid://l3k4bv7gook8"]
 
-[ext_resource type="Script" uid="uid://d3yrr20wpq2bq" path="res://weapons/scripts/railgun.gd" id="1_7bwii"]
+[ext_resource type="PackedScene" uid="uid://chq5spf8u7oto" path="res://weapons/scenes/generic_weapon.tscn" id="1_7bwii"]
+[ext_resource type="Script" uid="uid://cot3vao4hfdab" path="res://weapons/scripts/railgun.gd" id="2_7bwii"]
+[ext_resource type="PackedScene" uid="uid://57uy0pei6q0a" path="res://weapons/scenes/railgun_bolt.tscn" id="3_guj83"]
 
-[node name="Railgun" type="Node2D"]
-script = ExtResource("1_7bwii")
+[node name="Railgun" instance=ExtResource("1_7bwii")]
+script = ExtResource("2_7bwii")
+dmg_divisor = 80000.0
+max_force = 500.0
+bolt_scene = ExtResource("3_guj83")
 
-[node name="CooldownTimer" type="Timer" parent="."]
+[node name="Cooldown" parent="." index="0"]
 wait_time = 1.5
-one_shot = true
 
-[node name="ChargeTimer" type="Timer" parent="."]
+[node name="ChargeTimer" type="Timer" parent="." index="1"]
 one_shot = true
