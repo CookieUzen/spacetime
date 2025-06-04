@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=4 uid="uid://l3k4bv7gook8"]
 
 [ext_resource type="PackedScene" uid="uid://chq5spf8u7oto" path="res://weapons/scenes/generic_weapon.tscn" id="1_7bwii"]
-[ext_resource type="Script" path="res://weapons/scripts/railgun.gd" id="2_7bwii"]
+[ext_resource type="Script" uid="uid://cot3vao4hfdab" path="res://weapons/scripts/railgun.gd" id="2_7bwii"]
 [ext_resource type="PackedScene" uid="uid://57uy0pei6q0a" path="res://weapons/scenes/railgun_bolt.tscn" id="3_guj83"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_7bwii"]
