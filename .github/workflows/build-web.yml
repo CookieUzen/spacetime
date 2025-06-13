@@ -1,0 +1,63 @@
+name: Build and Deploy Web Game
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# only run one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  export_web:
+    runs-on: ubuntu-latest
+    name: Export Web
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: export game
+        id: export
+        uses: firebelley/godot-export@v6.0.0
+        with:
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.4/Godot_v4.4-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.4/Godot_v4.4-stable_export_templates.tpz
+          relative_project_path: ./
+          archive_output: true
+
+      - name: Upload Web Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-export
+          path: ${{ steps.export.outputs.archive_directory }}/Web.zip
+          retention-days: 30
+
+      - name: Extract Web Build for Pages
+        run: |
+          mkdir -p web-build
+          unzip "${{ steps.export.outputs.archive_directory }}/Web.zip" -d web-build/
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web-build/
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: export_web
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
