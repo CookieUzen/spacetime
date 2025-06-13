@@ -32,24 +32,12 @@ jobs:
           godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.x86_64.zip
           godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz
           relative_project_path: ./
-          archive_output: true
-
-      - name: Upload Web Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: web-export
-          path: ${{ steps.export.outputs.archive_directory }}/Web.zip
-          retention-days: 30
-
-      - name: Extract Web Build for Pages
-        run: |
-          mkdir -p web-build
-          unzip "${{ steps.export.outputs.archive_directory }}/Web.zip" -d web-build/
+          archive_output: false
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web-build/
+          path: ${{ steps.export.outputs.build_directory }}/Web/
 
   deploy:
     environment:
