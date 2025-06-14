@@ -10,3 +10,7 @@ script = ExtResource("1_rurmg")
 [node name="HUD" parent="." instance=ExtResource("2_kfd2q")]
 
 [node name="Empty" parent="." instance=ExtResource("3_sgjrt")]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://ok7vq1pc57qc")
+spawn_path = NodePath(".")

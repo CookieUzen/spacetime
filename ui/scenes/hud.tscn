@@ -1,7 +1,43 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7gfw5oae4hec"]
+[gd_scene load_steps=3 format=3 uid="uid://c7gfw5oae4hec"]
 
 [ext_resource type="Script" uid="uid://ccplc0ff2i88g" path="res://ui/scenes/hud.gd" id="1_aydmx"]
+[ext_resource type="Script" uid="uid://coadmm1qm263u" path="res://ui/scripts/debug_menu.gd" id="2_itb64"]
 
 [node name="HUD" type="CanvasLayer"]
 layer = 2
 script = ExtResource("1_aydmx")
+
+[node name="DebugMenu" type="BoxContainer" parent="."]
+z_index = 4
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -169.5
+offset_right = 169.5
+offset_bottom = 31.0
+grow_horizontal = 2
+alignment = 1
+script = ExtResource("2_itb64")
+
+[node name="StartServer" type="Button" parent="DebugMenu"]
+layout_mode = 2
+text = "Start Server"
+
+[node name="JoinServer" type="Button" parent="DebugMenu"]
+layout_mode = 2
+text = "Join Server"
+
+[node name="Address" type="LineEdit" parent="DebugMenu"]
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "Address"
+
+[node name="Port" type="LineEdit" parent="DebugMenu"]
+layout_mode = 2
+text = "1234"
+placeholder_text = "Port"
+select_all_on_focus = true
+
+[node name="Status" type="Button" parent="DebugMenu"]
+layout_mode = 2
+text = "Status"

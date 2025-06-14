@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameState="*res://gamestates/scenes/gamestate.tscn"
+Multiplayer="*res://gamestates/scenes/multiplayer.tscn"
 
 [editor_plugins]
 
