@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ok7vq1pc57qc"]
+[gd_scene load_steps=7 format=3 uid="uid://ok7vq1pc57qc"]
 
 [ext_resource type="Script" uid="uid://cf1ybr6xev321" path="res://players/scripts/spaceship.gd" id="1_6qu8m"]
 [ext_resource type="Script" uid="uid://b54lim2rxi7u6" path="res://players/scripts/player.gd" id="1_mdjji"]
@@ -12,6 +12,26 @@ bounce = 0.5
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6qu8m"]
 radius = 6.0
 height = 26.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mdjji"]
+properties/0/path = NodePath("Spaceship:ramming_divisor")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:hp")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:armor")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:shield")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Spaceship:position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Spaceship:rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_mdjji")
@@ -48,3 +68,6 @@ shape = SubResource("CapsuleShape2D_6qu8m")
 [node name="ShieldRegenDelay" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mdjji")

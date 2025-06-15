@@ -7,8 +7,9 @@ class_name PlayerData
 @export var player_id : int = 0
 @export var player_name : String = ""
 @export var player_input_mapping : String = ""
+@export var peer_id : int = 0 # The peer ID of the player, used for multiplayer
 
-func _init(new_player_id: int, new_player_name: String, new_player_input_mapping,  max_hp_value: float = -1, max_shield_value: float = -1) -> void:
+func _init(new_player_id: int, new_player_name: String, new_player_input_mapping, new_peer_id: int, max_hp_value: float = -1, max_shield_value: float = -1) -> void:
 	max_hp = max_hp_value
 	hp = max_hp
 
@@ -18,3 +19,4 @@ func _init(new_player_id: int, new_player_name: String, new_player_input_mapping
 	player_id = new_player_id
 	player_name = new_player_name
 	player_input_mapping = new_player_input_mapping
+	peer_id = new_peer_id

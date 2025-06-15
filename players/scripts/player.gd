@@ -7,6 +7,7 @@ extends Node2D
 @export var player_id := 0;
 @export var player_input_mapping := "";
 @export var player_name := ""
+@export var peer_id := 0; # The peer ID of the player, used for multiplayer
 
 @export var armor : float = 0.8	# Armor coefficient, times all dmg by this value
 
@@ -54,6 +55,13 @@ func _ready() -> void:
 
 	# Listen for the player to be hit
 	$Spaceship.connect("hit", _on_hit)
+
+	# Disable all calculations if not the local authority
+	if not self.is_multiplayer_authority():
+		# Disable physics
+		set_physics_process(false)
+		set_process_input(false)
+		return
 
 	# Load teleport ability for now
 	# TODO: link to menu or something

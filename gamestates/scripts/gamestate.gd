@@ -10,12 +10,25 @@ signal player_added(player_id: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
+
+func reset() -> void:
+	# Reset everything
+	players.clear()
+	player_data.clear()
+	player_count = 0
 
 func new_player(player: Node2D) -> void:
 	# Add the player to the players array
 	players.append(player)
-	player_data.append(PlayerData.new(player.player_id, player.player_name, player.player_input_mapping, player.max_hp, player.max_shield))
+	player_data.append(PlayerData.new(
+		player.player_id,
+		player.player_name,
+		player.player_input_mapping,
+		player.peer_id,
+		player.max_hp,
+		player.max_shield
+	))
 	player_count += 1
 
 	emit_signal("player_added", player.player_id)
