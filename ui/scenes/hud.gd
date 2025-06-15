@@ -11,6 +11,13 @@ func _ready() -> void:
 	# Listen for hp/shield updates
 	GameState.connect("hp_updated", _on_hp_updated)
 	GameState.connect("shield_updated", _on_shield_updated)
+	GameState.connect("reset_all", _delete_bars)
+
+func _delete_bars() -> void:
+	# Remove all HP/Shield bars
+	for instance in hp_shield_instances:
+		instance.queue_free()
+	hp_shield_instances.clear()
 
 func _on_hp_updated(player_id: int, hp: float) -> void:
 	# Update the HP bar for the player
