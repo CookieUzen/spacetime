@@ -36,8 +36,8 @@ func _spawn_player(peer_id: int) -> Node2D:
 	player.player_name = "Player " + str(player.player_id)	# Player 1
 	player.peer_id = peer_id
 
-	# delegate the player to the user
-	player.set_multiplayer_authority(peer_id)
+	# Let the server control the player
+	player.set_multiplayer_authority(1)
 
 	return player
 

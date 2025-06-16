@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ok7vq1pc57qc"]
+[gd_scene load_steps=8 format=3 uid="uid://ok7vq1pc57qc"]
 
 [ext_resource type="Script" uid="uid://cf1ybr6xev321" path="res://players/scripts/spaceship.gd" id="1_6qu8m"]
 [ext_resource type="Script" uid="uid://b54lim2rxi7u6" path="res://players/scripts/player.gd" id="1_mdjji"]
+[ext_resource type="Script" uid="uid://m4ot2gxcnhs7" path="res://players/scripts/input_manager.gd" id="2_djlu8"]
 [ext_resource type="Texture2D" uid="uid://bg2hifg06tx7d" path="res://players/resources/spaceship1.png" id="2_mdjji"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i6aj8"]
@@ -35,6 +36,9 @@ properties/5/replication_mode = 1
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_mdjji")
+
+[node name="InputManager" type="Node2D" parent="."]
+script = ExtResource("2_djlu8")
 
 [node name="Spaceship" type="RigidBody2D" parent="." groups=["Spaceships"]]
 collision_mask = 4353

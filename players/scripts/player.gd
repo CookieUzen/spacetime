@@ -1,4 +1,5 @@
 extends Node2D
+class_name Player
 
 @export var max_hp : float = 100.0
 @export var max_shield : float = 30.0
@@ -56,17 +57,17 @@ func _ready() -> void:
 	# Listen for the player to be hit
 	$Spaceship.connect("hit", _on_hit)
 
+	# Load teleport ability for now
+	# TODO: link to menu or something
+	var teleport_scene: PackedScene = preload("res://abilities/scenes/teleport.tscn")
+	ability_loader(teleport_scene)
+
 	# Disable all calculations if not the local authority
 	if not self.is_multiplayer_authority():
 		# Disable physics
 		set_physics_process(false)
 		set_process_input(false)
 		return
-
-	# Load teleport ability for now
-	# TODO: link to menu or something
-	var teleport_scene: PackedScene = preload("res://abilities/scenes/teleport.tscn")
-	ability_loader(teleport_scene)
 
 func ability_loader(scene: PackedScene) -> bool:
 	# Load the ability scene and add it to the player
