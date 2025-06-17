@@ -51,7 +51,7 @@ func movement_input(input_dict: Dictionary) -> void:
 	backwards = input_dict.get("backwards", false)
 	stop_damping = input_dict.get("stop_damping", false)
 
-	print("Input received from player ", self_player.player_id, ": ", input_dict)
+	#print("Input received from player ", self_player.player_id, ": ", input_dict)
 
 func reset_input() -> void:
 	# Reset the input variables
