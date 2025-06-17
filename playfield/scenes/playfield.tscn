@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgvpxkybjlgu2" path="res://playfield/scenes/playfield.gd" id="1_rurmg"]
 [ext_resource type="PackedScene" uid="uid://c7gfw5oae4hec" path="res://ui/scenes/hud.tscn" id="2_kfd2q"]
-[ext_resource type="PackedScene" uid="uid://061f5qboeq12" path="res://maps/scenes/map.tscn" id="3_sgjrt"]
+[ext_resource type="PackedScene" uid="uid://hje71qqr7ug8" path="res://maps/scenes/map.tscn" id="3_sgjrt"]
 
 [node name="Playfield" type="Node2D"]
 script = ExtResource("1_rurmg")
@@ -13,7 +13,7 @@ metadata/_edit_vertical_guides_ = [206.0]
 [node name="Map" parent="." instance=ExtResource("3_sgjrt")]
 
 [node name="Players" type="Node2D" parent="."]
-position = Vector2(515, 227)
+position = Vector2(54, 43)
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://ok7vq1pc57qc")
