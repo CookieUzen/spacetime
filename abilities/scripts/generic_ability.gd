@@ -20,6 +20,8 @@ func activate() -> bool:
 	_ability()
 	cooldown_timer.start()
 	return true
+	
+
 
 func _ability() -> void:
 	# This function should be overloaded by the child class

@@ -7,6 +7,7 @@ const DEFAULT_ANGLAR_DAMPING: float = 1
 const THRUST_FORCE: float = 100000.0 * DEFAULT_DAMPING	# Force applied to the ship when moving
 const ROTATION_FORCE: float = 100000.0	* DEFAULT_ANGLAR_DAMPING	# Force applied to the ship when turning
 const RAMMING_DIVISOR: float = 3000	# Divides KE by this amount
+const TILE_SIZE := Vector2(16, 16)
 
 var gun_scene: PackedScene
 var gun: Node2D
@@ -73,6 +74,16 @@ func _ready() -> void:
 	call_deferred("add_sibling", gun)	# We need to defer here, 
 										# because parent need to set up its own tree first
 
+# Extreme circumstances
+func _clamp_to_map_bounds() -> void:
+	pass
+	#var map = get_tree().get_first_node_in_group("Map")
+	#var min = map.world_bounds.position - 
+	#var max = map.world_bounds.position + map.world_bounds.size - TILE_SIZE
+	#print(global_position.clamp(min, max))
+	#global_position = global_position.clamp(min, max)
+	
+	
 func _physics_process(delta: float) -> void:
 	# movement calculations
 	var rot_dir: float = 0;		# % of max rot force
@@ -104,6 +115,7 @@ func _physics_process(delta: float) -> void:
 
 	# Consume the input (for now)
 	# TODO: add some sort of guessing if we are missing inputs
+	_clamp_to_map_bounds()
 	reset_input()
 
 

@@ -3,6 +3,7 @@ extends Node2D
 var spawn_points := [];
 
 @export var world_bounds: Rect2 = Rect2(Vector2.ZERO, Vector2(1000, 512))
+@onready var tilemap: TileMapLayer = $TileMapLayer
 
 func is_within_bounds(pos: Vector2) -> bool:
 	return world_bounds.has_point(pos)
@@ -15,6 +16,9 @@ func _ready() -> void:
 
 	# Connect to the GameState signal
 	add_to_group("Map")
+	for child in get_children():
+		child.add_to_group("Map")
+			
 	GameState.connect("player_added", _move_player_to_spawn)
 
 func _move_player_to_spawn(player_id: int) -> void:
