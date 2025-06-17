@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=4 uid="uid://hje71qqr7ug8"]
+[gd_scene load_steps=7 format=4 uid="uid://ckxw42fn4hp31"]
 
 [ext_resource type="Texture2D" uid="uid://divkmlpim4ui" path="res://maps/resources/Tilemap-Space.png" id="1_e6kqv"]
-[ext_resource type="Script" uid="uid://djrp27jhijf0b" path="res://maps/scenes/map.gd" id="1_j2glu"]
+[ext_resource type="Script" path="res://maps/scenes/map.gd" id="1_j2glu"]
 [ext_resource type="Texture2D" uid="uid://ccuvb10mf2qjt" path="res://maps/resources/Ball.png" id="2_g8myf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j2b8q"]
