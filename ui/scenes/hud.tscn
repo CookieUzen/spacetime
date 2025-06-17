@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7gfw5oae4hec"]
 
 [ext_resource type="Script" uid="uid://ccplc0ff2i88g" path="res://ui/scenes/hud.gd" id="1_aydmx"]
-[ext_resource type="Script" path="res://ui/scripts/debug_menu.gd" id="2_itb64"]
+[ext_resource type="Script" uid="uid://coadmm1qm263u" path="res://ui/scripts/debug_menu.gd" id="2_itb64"]
 
 [node name="HUD" type="CanvasLayer"]
 layer = 2
