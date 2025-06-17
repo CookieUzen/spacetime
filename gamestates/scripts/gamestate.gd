@@ -3,7 +3,6 @@ extends Node2D
 var players: Array[Node2D] = []
 var player_data: Array[PlayerData] = []
 var player_count: int = 0
-#var map_boundary: Rect2 = 
 
 signal hp_updated(player_id: int, hp: float)
 signal shield_updated(player_id: int, hp: float)

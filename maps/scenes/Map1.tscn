@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://hje71qqr7ug8"]
 
 [ext_resource type="Texture2D" uid="uid://divkmlpim4ui" path="res://maps/resources/Tilemap-Space.png" id="1_e6kqv"]
-[ext_resource type="Script" path="res://maps/scenes/empty.gd" id="1_g8myf"]
+[ext_resource type="Script" uid="uid://djrp27jhijf0b" path="res://maps/scenes/map.gd" id="1_j2glu"]
 [ext_resource type="Texture2D" uid="uid://ccuvb10mf2qjt" path="res://maps/resources/Ball.png" id="2_g8myf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j2b8q"]
@@ -29,7 +29,7 @@ sources/0 = SubResource("TileSetAtlasSource_j2b8q")
 sources/1 = SubResource("TileSetAtlasSource_hmv31")
 
 [node name="Map" type="Node2D"]
-script = ExtResource("1_g8myf")
+script = ExtResource("1_j2glu")
 metadata/_edit_horizontal_guides_ = [0.0]
 metadata/_edit_vertical_guides_ = [0.0]
 
@@ -41,6 +41,7 @@ tile_set = SubResource("TileSet_u2kgr")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-63, -63)
 anchor_mode = 0
+script = ExtResource("1_j2glu")
 
 [node name="Spawnpoint1" type="Marker2D" parent="."]
 position = Vector2(206, 256)
