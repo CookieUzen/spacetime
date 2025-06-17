@@ -12,7 +12,6 @@ var max_hp_plus_shield: float
 @onready var hp_bar: TextureProgressBar = $HPBar
 @onready var shield_bar: TextureProgressBar = $ShieldBar
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass

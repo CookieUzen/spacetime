@@ -1,20 +1,23 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7gfw5oae4hec"]
 
 [ext_resource type="Script" uid="uid://ccplc0ff2i88g" path="res://ui/scenes/hud.gd" id="1_aydmx"]
-[ext_resource type="Script" uid="uid://coadmm1qm263u" path="res://ui/scripts/debug_menu.gd" id="2_itb64"]
+[ext_resource type="Script" path="res://ui/scripts/debug_menu.gd" id="2_itb64"]
 
 [node name="HUD" type="CanvasLayer"]
 layer = 2
 script = ExtResource("1_aydmx")
+metadata/_edit_vertical_guides_ = [0.0]
+metadata/_edit_horizontal_guides_ = [0.0]
 
 [node name="DebugMenu" type="BoxContainer" parent="."]
 z_index = 4
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -169.5
-offset_right = 169.5
-offset_bottom = 31.0
+offset_left = -237.0
+offset_top = 10.0
+offset_right = 163.0
+offset_bottom = 41.0
 grow_horizontal = 2
 alignment = 1
 script = ExtResource("2_itb64")

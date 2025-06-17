@@ -1,6 +1,5 @@
 extends Node2D
 
-
 var spawn_points := [];
 
 func _ready() -> void:
@@ -16,7 +15,7 @@ func _move_player_to_spawn(player_id: int) -> void:
 	print("Moving player to spawn point:", player_id)
 	var player: Node2D = GameState.players[player_id - 1]
 	player.position = spawn_points[(player_id - 1) % spawn_points.size()].position
-
+	print("Player Position:", player.position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

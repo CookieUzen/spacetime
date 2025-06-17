@@ -115,7 +115,7 @@ func _on_hit(body: Node2D, ke: float) -> void:
 	# restart timer and emit signals
 	_hit()
 	
-	# Minus left over from the hp
+	# Minus left over from the hpaa
 	hp -= dmg
 
 	# Update the game state

@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cbx5i04aul2ec" path="res://ui/hud.tres" id="2_hnh4d"]
 
 [node name="HPShieldContainer" type="MarginContainer"]
+offset_top = 2.0
 offset_right = 400.0
-offset_bottom = 50.0
+offset_bottom = 52.0
 script = ExtResource("1_ehmgl")
-hp = 25.0
 shield = 10.0
 max_hp = 30.0
 max_shield = 10.0

@@ -11,3 +11,4 @@ func _ability() -> void:
 
 	# Teleport!
 	parent_ship.call_deferred("set_global_position", parent_ship.global_position + teleport_vector)
+	
