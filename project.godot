@@ -125,6 +125,7 @@ p2_stop_damping={
 
 2d_physics/layer_1="Player 1 Ship"
 2d_physics/layer_2="Player 1 Barrel"
+2d_physics/layer_5="5"
 2d_physics/layer_9="Bullets"
 2d_physics/layer_13="Map"
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cf1ybr6xev321" path="res://players/scripts/spaceship.gd" id="1_6qu8m"]
 [ext_resource type="Script" uid="uid://b54lim2rxi7u6" path="res://players/scripts/player.gd" id="1_mdjji"]
-[ext_resource type="Script" path="res://players/scripts/input_manager.gd" id="2_djlu8"]
+[ext_resource type="Script" uid="uid://m4ot2gxcnhs7" path="res://players/scripts/input_manager.gd" id="2_djlu8"]
 [ext_resource type="Texture2D" uid="uid://bg2hifg06tx7d" path="res://players/resources/spaceship1.png" id="2_mdjji"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i6aj8"]
